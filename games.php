@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
@@ -16,13 +19,21 @@
       <div id="logo">
         <div id="logo_text">
           <h1>Drinking<span class="alternate_colour">101</span></h1>
+		  <?php
+		  if(isset($_SESSION['user'])){
+		  echo('Welcome to Drinking 101, ' . $_SESSION['user']);
+		  echo('<a href="logout.php" style="color:#FFFFFF"> Logout </a>');
+		  }else{
+		  echo('Welcome to Drinking 101');
+		  }
+		  ?>
         </div>
       </div>
       <div id="menubar">
         <ul id="menu">
           <!-- put class="tab_selected" in the li tag for the selected page - to highlight which page you're on -->
           <li><a href="home.php">Home</a></li>
-        	<li><a href="login.php">Login/Register</a></li>
+          <li><a href="login.php">Login/Register</a></li>
           <li><a href="games.php">Games</a></li>
           <li><a href="tips.php">Drinking Tips</a></li>
           <li><a href="drinks.php">Mixed Drinks</a></li>
@@ -30,13 +41,13 @@
       </div>
     </div>
     <div id="site_content">
-      <div id="panel"><img src="style/1234.png" alt="tree tops" /></div>
+      <div id="panel"><img src="style/Alcohol.jpg" alt="tree tops" /></div>
       <div class="sidebar">
        <!-- insert your sidebar items here -->
       </div>
       <div id="content">
         <!-- insert the page content here -->
-
+		 <li><a href="beerpong.php">Beer Pong</a></li>
         
         
        </div>

@@ -1,8 +1,27 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
 <head>
   <title>Drinking 101</title>
+  <?php
+   include ('dbconnect.php');
+   if (isset($_POST['username'])){
+   $name = $_POST['username'];
+         $pw = $_POST['pw'];
+
+         $query = "select * from users WHERE user_name = '$name' AND pass = '$pw'";
+         $result = mysqli_query($db, $query)
+         or die("Error Querying Database");
+         if ($row = mysqli_fetch_array($result))
+         {
+    #echo $query;
+	$_SESSION['user'] = $name;
+    echo '<META http-equiv="refresh" content="0;URL=home.php">';
+       }}
+?>
   <meta name="description" content="website description" />
   <meta name="keywords" content="website keywords, website keywords" />
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
@@ -16,6 +35,16 @@
       <div id="logo">
         <div id="logo_text">
           <h1>Drinking<span class="alternate_colour">101</span></h1>
+		  <p style="color:#FFFFFF">
+		  <?php
+		  if(isset($_SESSION['user'])){
+		  echo('Welcome to Drinking 101, ' . $_SESSION['user']);
+		  echo('<a href="logout.php" style="color:#FFFFFF"> Logout </a>');
+		  }else{
+		  echo('Welcome to Drinking 101');
+		  }
+		  ?>
+		  </p>
         </div>
       </div>
       <div id="menubar">
@@ -33,15 +62,36 @@
       <div id="panel"><img src="style/1234.png" alt="tree tops" /></div>
       <div class="sidebar">
        <!-- insert your sidebar items here -->
+	   <p> New user? Register here</p>
+	   <form action="login.php" method="post">
+	   <legend> Enter your information below:</legend>
+	   <p>
+	   <b>User Name:</b>
+	   <input type="text" name="user" size="10" maxlength="16" />
+	   </p>
+	   <p>
+	   <b>Password:</b>
+	   <input type="password" name="pass1" size="10" maxlength="16" />
+	   </p>
+	   <input type="submit" name="submit" value="Register" />
       </div>
       <div id="content">
         <!-- insert the page content here -->
-        <form method = "post" action = "____________">
-			<table>
-			<tr><td>Username:</td><td><input type="text" id="firstname" name="firstname" /></td></tr>
-			<tr><td>Password:</td><td><input type="text" id="lastname" name="lastname" /></td></tr>
-			<tr><td>&nbsp;</td><td><input type="submit" value="Login" /></td></tr>
-        	</table>
+		 <?php
+        if (isset($_POST['username'])) {
+        echo "<h2>Incorrect Username/Password</h2>";
+        }
+        ?>
+         <h1>Login</h1>
+			<form method="post" action="login.php">
+			<p>
+			<label for="username">Username:</label>
+			<input type="text" id="username" name="username" size="40" /></p>
+			<p>
+			<label for="password">Password:</label>
+			<input type="password" id="password" name="pw" size="40" /></p>
+
+			<p><input type="submit" value="login" name="submit" /></p>
 					
 		</form>
         

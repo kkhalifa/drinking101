@@ -5,7 +5,7 @@ session_start();
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
 <head>
-  <title>Drinking101</title>
+  <title>Drinking 101</title>
   <meta name="description" content="website description" />
   <meta name="keywords" content="website keywords, website keywords" />
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
@@ -19,7 +19,6 @@ session_start();
       <div id="logo">
         <div id="logo_text">
           <h1>Drinking<span class="alternate_colour">101</span></h1>
-		  <p style="color:#FFFFFF">
 		  <?php
 		  if(isset($_SESSION['user'])){
 		  echo('Welcome to Drinking 101, ' . $_SESSION['user']);
@@ -28,13 +27,12 @@ session_start();
 		  echo('Welcome to Drinking 101');
 		  }
 		  ?>
-		  </p>
         </div>
       </div>
       <div id="menubar">
         <ul id="menu">
           <!-- put class="tab_selected" in the li tag for the selected page - to highlight which page you're on -->
-          <li class="tab_selected"><a href="home.php">Home</a></li>
+          <li><a href="home.php">Home</a></li>
           <li><a href="login.php">Login/Register</a></li>
           <li><a href="games.php">Games</a></li>
           <li><a href="tips.php">Drinking Tips</a></li>
@@ -43,15 +41,48 @@ session_start();
       </div>
     </div>
     <div id="site_content">
-      <div id="panel"><img src="style/1234.png" alt="tree tops" /></div>
+      <div id="panel"><img src="style/BeerPongLogo.jpg" alt="tree tops" /></div>
       <div class="sidebar">
-        <!-- insert your sidebar items here -->
-       
+       <!-- insert your sidebar items here -->
       </div>
       <div id="content">
         <!-- insert the page content here -->
-		<h1>Welcome to Drinking 101</h1>      
-      </div>
+		 <font size="7"color="red">BEER PONG</font>
+		 <p><p>
+		 <b>Rules<b><p>
+<?php
+		 include('dbconnect.php');
+		 $query = "SELECT rules FROM games WHERE name = 'Beer Pong'";
+		 $result = mysqli_query($db, $query)
+		 or die("Error Querying Database");
+		 while($row = mysqli_fetch_array($result)) {
+		 $rules = $row['rules'];
+		 
+		 echo "<tr><td  >$rules\n";
+		 
+		 
+		 }
+        mysqli_close($db);
+
+?>
+		<p><b>Description<b><p>
+		<?php
+		 include('dbconnect.php');
+		 $query = "SELECT description FROM games WHERE name = 'Beer Pong'";
+		 $result = mysqli_query($db, $query)
+		 or die("Error Querying Database");
+		 while($row = mysqli_fetch_array($result)) {
+		 
+		 $description = $row['description'];
+		
+		 
+		 echo "<tr><td  >$description\n";
+		 }
+        mysqli_close($db);
+
+?>
+		
+       </div>
     <div id="site_content_bottom"></div>
     </div>
     <div id="footer">Copyright &copy; Company Name. All Rights Reserved. | <a href="http://validator.w3.org/check?uri=referer">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | <a href="http://www.facebook.com/Hawaiian242">design by tmihelic</a></div>

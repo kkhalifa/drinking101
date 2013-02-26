@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
@@ -16,6 +19,16 @@
       <div id="logo">
         <div id="logo_text">
           <h1>Drinking<span class="alternate_colour">101</span></h1>
+		  <p style="color:#FFFFFF">
+		  <?php
+		  if(isset($_SESSION['user'])){
+		  echo('Welcome to Drinking 101, ' . $_SESSION['user']);
+		  echo('<a href="logout.php" style="color:#FFFFFF"> Logout </a>');
+		  }else{
+		  echo('Welcome to Drinking 101');
+		  }
+		  ?>
+		  </p>
         </div>
       </div>
       <div id="menubar">
