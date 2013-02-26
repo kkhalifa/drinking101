@@ -20,7 +20,8 @@ session_start();
     #echo $query;
 	$_SESSION['user'] = $name;
     echo '<META http-equiv="refresh" content="0;URL=home.php">';
-       }}
+       }
+	   }
 ?>
   <meta name="description" content="website description" />
   <meta name="keywords" content="website keywords, website keywords" />
@@ -63,7 +64,7 @@ session_start();
       <div class="sidebar">
        <!-- insert your sidebar items here -->
 	   <p> New user? Register here</p>
-	   <form action="login.php" method="post">
+	   <form method="post" action="registered.php">
 	   <legend> Enter your information below:</legend>
 	   <p>
 	   <b>User Name:</b>
@@ -74,14 +75,11 @@ session_start();
 	   <input type="password" name="pass1" size="10" maxlength="16" />
 	   </p>
 	   <input type="submit" name="submit" value="Register" />
+	   </form>
       </div>
       <div id="content">
         <!-- insert the page content here -->
-		 <?php
-        if (isset($_POST['username'])) {
-        echo "<h2>Incorrect Username/Password</h2>";
-        }
-        ?>
+		 
          <h1>Login</h1>
 			<form method="post" action="login.php">
 			<p>

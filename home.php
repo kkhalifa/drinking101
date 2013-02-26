@@ -24,8 +24,12 @@ session_start();
 		  if(isset($_SESSION['user'])){
 		  echo('Welcome to Drinking 101, ' . $_SESSION['user']);
 		  echo('<a href="logout.php" style="color:#FFFFFF"> Logout </a>');
+
+  
 		  }else{
 		  echo('Welcome to Drinking 101');
+
+
 		  }
 		  ?>
 		  </p>
@@ -50,7 +54,24 @@ session_start();
       </div>
       <div id="content">
         <!-- insert the page content here -->
-		<h1>Welcome to Drinking 101</h1>      
+		<h1>Welcome to Drinking 101</h1>  
+    
+    <?php
+
+include('dbconnect.php');
+     $query = "SELECT title, content FROM homepage ORDER BY id DESC";
+     $result = mysqli_query($db, $query)
+     or die("Error Querying Database");
+     while($row = mysqli_fetch_array($result)){
+     $title = $row['title'];
+     echo "<p><b>$title</b></p>";
+     $content = $row['content'];
+     echo "<p>$content</p>";
+}
+        mysqli_close($db);
+
+    ?>
+
       </div>
     <div id="site_content_bottom"></div>
     </div>

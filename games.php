@@ -19,6 +19,7 @@ session_start();
       <div id="logo">
         <div id="logo_text">
           <h1>Drinking<span class="alternate_colour">101</span></h1>
+		  <p style="color:#FFFFFF">
 		  <?php
 		  if(isset($_SESSION['user'])){
 		  echo('Welcome to Drinking 101, ' . $_SESSION['user']);
@@ -27,6 +28,7 @@ session_start();
 		  echo('Welcome to Drinking 101');
 		  }
 		  ?>
+		  </p>
         </div>
       </div>
       <div id="menubar">

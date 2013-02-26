@@ -6,6 +6,33 @@ session_start();
 
 <head>
   <title>Drinking 101</title>
+  <?php
+   include ('dbconnect.php');
+   if (isset($_POST['username'])){
+   $name = $_POST['username'];
+         $pw = $_POST['pw'];
+
+         $query = "select * from users WHERE user_name = '$name' AND pass = '$pw'";
+         $result = mysqli_query($db, $query)
+         or die("Error Querying Database");
+         if ($row = mysqli_fetch_array($result))
+         {
+    #echo $query;
+	$_SESSION['user'] = $name;
+    echo '<META http-equiv="refresh" content="0;URL=home.php">';
+       }}
+?>
+<?php
+				include('dbconnect.php');
+					$regname = $_POST['user'];
+					$regpass = $_POST['pass1'];
+					
+					$query = "INSERT INTO users (user_name, pass) VALUES ('";
+					$query = $query .  $regname . "', '" . $regpass . "')";
+					$result = mysqli_query($db, $query)
+                         or die("Error Querying Database");
+					
+					?>
   <meta name="description" content="website description" />
   <meta name="keywords" content="website keywords, website keywords" />
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
@@ -49,20 +76,8 @@ session_start();
       </div>
       <div id="content">
         <!-- insert the page content here -->
-          <?php
-
-include('dbconnect.php');
-     $query = "SELECT tip, benefit FROM tips ORDER BY id";
-     $result = mysqli_query($db, $query)
-     or die("Error Querying Database");
-     while($row = mysqli_fetch_array($result)){
-     $tip = $row['tip'];
-	 $benefit = $row['benefit'];
-     echo "<p><b>$tip: </b>$benefit</p>";
-}
-        mysqli_close($db);
-
-    ?>
+		 <h1>Thank you for registering with us! Proceed to login</h1>
+        
         
        </div>
     <div id="site_content_bottom"></div>
