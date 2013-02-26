@@ -47,39 +47,28 @@ session_start();
       <div class="sidebar">
        <!-- insert your sidebar items here -->
        
-       <li><a href="addgames.php">Add Games</a></li>
        
        </div>
       <div id="content">
         <!-- insert the page content here -->
-
-
         
-        
-        <?php
-	include('dbconnect.php');
-	$query = "SELECT * FROM games ORDER BY id";
-    $result = mysqli_query($db, $query)
-                         or die("Error Querying Database");
-    while($row = mysqli_fetch_array($result)) {
-  		$name = $row['name'];
-  		$rules = $row['rules'];
-  		$description = $row['description'];
-
-  		
-  	echo "<p><h1> NAME: $name  </h1></p>";
-  	echo "<p> RULES: $rules</p>";
-  	echo "<p> DESCRIPTION: $description</p>";
-  }                 
-                         
-                         
-                         
-    mysqli_close($db);
-
-?>
-        
-        
-    
+					
+					
+					
+					<form method="post" action="games2.php">
+			<p>
+			<label for="name">Name:        </label>
+			<input type="text" id="gameName" name="name" size="40" /></p>
+			<p>
+			<label for="rules">Rules:       </label></p>
+			
+			<p><textarea rows="7" cols="40" name="rules" wrap="physical"></textarea></p>
+			<p>
+			<label for="description">Description: </label></p>
+			<p><textarea rows="7" cols="40" name="description" wrap="physical"></textarea></p>
+			<p><input type="submit" value="Submit Game" /></p>
+					
+		</form>
  
         
         
