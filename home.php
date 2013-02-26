@@ -37,7 +37,7 @@
       </div>
       <div id="content">
         <!-- insert the page content here -->
-		<h1>Welcome to Drinking 101</h1>       
+		<h1>Welcome to Drinking 101, how are you?</h1>       
       </div>
     <div id="site_content_bottom"></div>
     </div>
