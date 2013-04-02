@@ -28,7 +28,7 @@ session_start();
 					$regpass = $_POST['pass1'];
 					
 					$query = "INSERT INTO users (user_name, pass) VALUES ('";
-					$query = $query .  $regname . "', '" . $regpass . "')";
+					$query = $query .  $regname . "', SHA('" . $regpass . "'))";
 					$result = mysqli_query($db, $query)
                          or die("Error Querying Database");
 					

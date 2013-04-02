@@ -12,10 +12,10 @@ session_start();
    $name = $_POST['username'];
          $pw = $_POST['pw'];
 
-         $query = "select * from users WHERE user_name = '$name' AND pass = '$pw'";
+         $query = "select * from users WHERE user_name = '$name' AND pass = SHA('$pw')";
          $result = mysqli_query($db, $query)
          or die("Error Querying Database");
-         if ($row = mysqli_fetch_array($result))
+         if (!$row = mysqli_fetch_array($result))
          {
     #echo $query;
 	$_SESSION['user'] = $name;
@@ -81,7 +81,12 @@ session_start();
         <!-- insert the page content here -->
 		 
          <h1>Login</h1>
-			<form method="post" action="login.php">
+		 <?php
+		 if(isset($_SESSION['user'])){
+		  echo('You\'re already logged in, ' . $_SESSION['user']);
+		  echo('<a href="logout.php" style="color:#FFFFFF"> Logout </a>');
+		  }else{
+			echo('<form method="post" action="login.php">
 			<p>
 			<label for="username">Username:</label>
 			<input type="text" id="username" name="username" size="40" /></p>
@@ -91,8 +96,9 @@ session_start();
 
 			<p><input type="submit" value="login" name="submit" /></p>
 					
-		</form>
-        
+		</form>');
+		}
+        ?>
         
        </div>
     <div id="site_content_bottom"></div>

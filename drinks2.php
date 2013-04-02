@@ -19,16 +19,6 @@ session_start();
       <div id="logo">
         <div id="logo_text">
           <h1>Drinking<span class="alternate_colour">101</span></h1>
-		  <p style="color:#FFFFFF">
-		  <?php
-		  if(isset($_SESSION['user'])){
-		  echo('Welcome to Drinking 101, ' . $_SESSION['user']);
-		  echo('<a href="logout.php" style="color:#FFFFFF"> Logout </a>');
-		  }else{
-		  echo('Welcome to Drinking 101');
-		  }
-		  ?>
-		  </p>
         </div>
       </div>
       <div id="menubar">
@@ -46,49 +36,63 @@ session_start();
       <div id="panel"><img src="style/1234.png" alt="tree tops" /></div>
       <div class="sidebar">
        <!-- insert your sidebar items here -->
-	   <?php
-	   if(isset($_SESSION['user'])){
-       echo'<li><a href="adddrinks.php">Add Drinks</a></li>';
-	   }
-	   ?>
-       <li><a href="drinksearch.php">Search Drinks</a></li>
-	   <li><a href="alcoholsearch.php">Search By Alcohol</a></li>
-       
-       </div>
+      </div>
       <div id="content">
         <!-- insert the page content here -->
-       <?php
+		<h1>Thank you for submitting!</h1> 
+		
+		  <?php
+					include('dbconnect.php');
+					$name = $_POST['name'];
+					$alc1 = $_POST['alcohol1'];
+          
+					$ing1 = $_POST['ingredient1'];
+          
 
-        include('dbconnect.php');
+          $amt1 = $_POST['amount1'];
+          
+          $amt4 = $_POST['amount4'];
+         
+
+					if(!empty($name) && !empty($alc1) && !empty($amt1)&& !empty($ing1)&& !empty($amt4)){
+    				$query = "INSERT INTO drinks (name) VALUES ('";
+    				$query = $query . $name . "')";
+    				$result = mysqli_query($db, $query)
+                           or die("Error Querying Database");
+
+          $query = "SELECT id FROM drinks WHERE name = '$name' ORDER BY id DESC";
+
+          $result = mysqli_query($db, $query)
+          or die("Error Querying Database");
+
+          $row = mysqli_fetch_array($result);
+          $id = $row['id'];
+
+            $query = "INSERT INTO drinksalcohol (drinkid, aname, aamount) VALUES ('";
+            $query = $query . $id . "', '" . $alc1 . "', '" . $amt1 . "')";
+            $result = mysqli_query($db, $query)
+                           or die("Error Querying Database");
 
 
-             $query = "SELECT d.name, da.aname, da.aamount, di.iname, di.iamount FROM 
-			 drinks d JOIN drinksalcohol da ON d.id=da.drinkid JOIN drinksingredients di ON da.drinkid = di.drinkid ORDER BY d.name";
-             $result = mysqli_query($db, $query)
-             or die("Error Querying Database1");
-             while($row = mysqli_fetch_array($result)){
+          
 
-              $name = $row['name'];
-			  $aname = $row['aname'];
-              $aamount = $row['aamount'];
-			  $iname = $row['iname'];
-              $iamount = $row['iamount'];
-              
-              echo "<p> </p>";
-            
-              echo "<p><h1> DRINK NAME: <a href=http://localhost/drinking101wip/drinkpage.php> $name </a> </h1></p>";
 
-              echo "<p> <b> ALCOHOL: </b> </p>";
-				
-                echo "<p> $aname - $aamount </p>";
+          $query = "INSERT INTO drinksingredients (drinkid, iname, iamount) VALUES ('";
+            $query = $query . $id . "', '" . $ing1 . "', '" . $amt4 . "')";
+            $result = mysqli_query($db, $query)
+                           or die("Error Querying Database");
 
-              echo "<p> <b>OTHER INGREDIENTS: </b> </p>";
-                echo "<p> $iname - $iamount </p>";
-              }
-              
-                mysqli_close($db);
 
-            ?>
+          
+
+
+
+
+
+          }
+
+					?>
+
         
         
        </div>

@@ -46,8 +46,12 @@ session_start();
       <div id="panel"><img src="style/1234.png" alt="tree tops" /></div>
       <div class="sidebar">
        <!-- insert your sidebar items here -->
+       <?php
+		  if(isset($_SESSION['user'])){
+		  echo('<li><a href="addgames.php">Add Games</a></li>');
+		  }
+		  ?>
        
-       <li><a href="addgames.php">Add Games</a></li>
        
        </div>
       <div id="content">

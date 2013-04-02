@@ -35,7 +35,7 @@ session_start();
         <ul id="menu">
           <!-- put class="tab_selected" in the li tag for the selected page - to highlight which page you're on -->
           <li><a href="home.php">Home</a></li>
-        	<li><a href="login.php">Login/Register</a></li>
+          <li><a href="login.php">Login/Register</a></li>
           <li><a href="games.php">Games</a></li>
           <li><a href="tips.php">Drinking Tips</a></li>
           <li><a href="drinks.php">Mixed Drinks</a></li>
@@ -46,49 +46,45 @@ session_start();
       <div id="panel"><img src="style/1234.png" alt="tree tops" /></div>
       <div class="sidebar">
        <!-- insert your sidebar items here -->
-	   <?php
-	   if(isset($_SESSION['user'])){
-       echo'<li><a href="adddrinks.php">Add Drinks</a></li>';
-	   }
-	   ?>
-       <li><a href="drinksearch.php">Search Drinks</a></li>
-	   <li><a href="alcoholsearch.php">Search By Alcohol</a></li>
+       
        
        </div>
       <div id="content">
         <!-- insert the page content here -->
-       <?php
+        
+					
+					
+					
+					<form method="post" action="drinks2.php">
+			<p>
+			<label for="name">Drink Name:        </label>
+			<input type="text" id="drinkName" name="name" size="40" /></p>
+			<p> </p>
+        <p>
+      <label for="alcohol1">Alcoholic Ingredients:       </label></p>
+      <p>
+			<label for="alcohol1">Name of Alcohol / Amount (include units):       </label></p>
+			
+			<p>
+        <input type="text" id="alc1" name="alcohol1" size="40" />
+        <label for="amt1"> / </label>
+        <input type="text" id="amt1" name="amount1" size="40" />
+      </p>
 
-        include('dbconnect.php');
-
-
-             $query = "SELECT d.name, da.aname, da.aamount, di.iname, di.iamount FROM 
-			 drinks d JOIN drinksalcohol da ON d.id=da.drinkid JOIN drinksingredients di ON da.drinkid = di.drinkid ORDER BY d.name";
-             $result = mysqli_query($db, $query)
-             or die("Error Querying Database1");
-             while($row = mysqli_fetch_array($result)){
-
-              $name = $row['name'];
-			  $aname = $row['aname'];
-              $aamount = $row['aamount'];
-			  $iname = $row['iname'];
-              $iamount = $row['iamount'];
-              
-              echo "<p> </p>";
-            
-              echo "<p><h1> DRINK NAME: <a href=http://localhost/drinking101wip/drinkpage.php> $name </a> </h1></p>";
-
-              echo "<p> <b> ALCOHOL: </b> </p>";
-				
-                echo "<p> $aname - $aamount </p>";
-
-              echo "<p> <b>OTHER INGREDIENTS: </b> </p>";
-                echo "<p> $iname - $iamount </p>";
-              }
-              
-                mysqli_close($db);
-
-            ?>
+      <p> </p>
+			<p>
+			<label for="description">Other Ingredients: </label></p>
+			<p>
+      <label for="alcohol1">Name of Ingredient / Amount (include units):       </label></p>
+        <input type="text" id="ing1" name="ingredient1" size="40" />
+        <label for="amt1"> / </label>
+        <input type="text" id="amt4" name="amount4" size="40" />
+      </p>
+			<p><input type="submit" value="Submit Drink" /></p>
+					
+          
+		</form>
+ 
         
         
        </div>

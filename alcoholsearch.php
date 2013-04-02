@@ -46,49 +46,19 @@ session_start();
       <div id="panel"><img src="style/1234.png" alt="tree tops" /></div>
       <div class="sidebar">
        <!-- insert your sidebar items here -->
-	   <?php
-	   if(isset($_SESSION['user'])){
-       echo'<li><a href="adddrinks.php">Add Drinks</a></li>';
-	   }
-	   ?>
-       <li><a href="drinksearch.php">Search Drinks</a></li>
-	   <li><a href="alcoholsearch.php">Search By Alcohol</a></li>
+       
        
        </div>
       <div id="content">
         <!-- insert the page content here -->
-       <?php
+       
+            <form method = "post" action = "alcoholsearch2.php">
+          <table>
+            <tr><td>Enter Alcohol type:   </td><td><input type="text" id="alcsearch" name="alcsearch" /></td></tr>
 
-        include('dbconnect.php');
-
-
-             $query = "SELECT d.name, da.aname, da.aamount, di.iname, di.iamount FROM 
-			 drinks d JOIN drinksalcohol da ON d.id=da.drinkid JOIN drinksingredients di ON da.drinkid = di.drinkid ORDER BY d.name";
-             $result = mysqli_query($db, $query)
-             or die("Error Querying Database1");
-             while($row = mysqli_fetch_array($result)){
-
-              $name = $row['name'];
-			  $aname = $row['aname'];
-              $aamount = $row['aamount'];
-			  $iname = $row['iname'];
-              $iamount = $row['iamount'];
-              
-              echo "<p> </p>";
+            <tr><td>&nbsp;</td><td><input type="submit" value="Search For Alcohol" /></td></tr>
+            </table>
             
-              echo "<p><h1> DRINK NAME: <a href=http://localhost/drinking101wip/drinkpage.php> $name </a> </h1></p>";
-
-              echo "<p> <b> ALCOHOL: </b> </p>";
-				
-                echo "<p> $aname - $aamount </p>";
-
-              echo "<p> <b>OTHER INGREDIENTS: </b> </p>";
-                echo "<p> $iname - $iamount </p>";
-              }
-              
-                mysqli_close($db);
-
-            ?>
         
         
        </div>

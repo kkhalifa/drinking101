@@ -40,3 +40,29 @@ PRIMARY KEY (id)
 );
 INSERT INTO tips (tip, benefit) VALUES ('Do not drink and drive', 'Drinking and driving causes death');
 INSERT INTO tips (tip, benefit) VALUES ('Drink in moderation', 'Drinking in moderation reduces risk of bad decisions');
+
+DROP TABLE IF EXISTS `drinks`;
+CREATE TABLE drinks (
+id INT NOT NULL AUTO_INCREMENT,
+name VARCHAR(100) NOT NULL,
+PRIMARY KEY (id)
+);
+
+
+DROP TABLE IF EXISTS `drinksalcohol`;
+CREATE TABLE drinksalcohol (
+entry INT NOT NULL AUTO_INCREMENT,
+drinkid INT NOT NULL,
+aname VARCHAR(100) NOT NULL,
+aamount VARCHAR(100) NOT NULL,
+PRIMARY KEY (entry)
+);
+
+DROP TABLE IF EXISTS `drinksingredients`;
+CREATE TABLE drinksingredients (
+entry INT NOT NULL AUTO_INCREMENT,
+drinkid INT NOT NULL,
+iname VARCHAR(100) NOT NULL,
+iamount VARCHAR(100) NOT NULL,
+PRIMARY KEY (entry)
+);
